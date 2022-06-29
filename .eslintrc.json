@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -21,7 +22,6 @@
     "prettier/prettier": "error",
     "eqeqeq": "error",
     "camelcase": "warn",
-    "no-empty": "warn",
-    "no-empty-function": "error"
+    "no-empty": "warn"
   }
 }
