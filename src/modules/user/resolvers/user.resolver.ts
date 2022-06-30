@@ -8,6 +8,7 @@ export class UserResolver {
 
   @Query()
   async user(@Args("id") id: string): Promise<User> {
-    return await this.userService.findOneById(id);
+    const user: User = await this.userService.findOneById(id);
+    return user;
   }
 }

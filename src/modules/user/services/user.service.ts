@@ -1,25 +1,17 @@
 import { Injectable } from "@nestjs/common";
-import http from "http";
+import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
+
 import { User } from "../models/user.model.js";
 
 @Injectable()
-export class UserService {
-  private readonly usersUrl = process.env.USERS_URL;
+export class UserService extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = process.env.USERS_URL;
+    this.httpCache = new HTTPCache();
+  }
 
   async findOneById(id: string): Promise<User> {
-    return new Promise((resolve) => {
-      let user: User;
-
-      http.get(`${this.usersUrl}/${id}`, (res) => {
-        let rawData = "";
-        res.on("data", (data) => {
-          rawData += data;
-        });
-        res.on("end", () => {
-          user = JSON.parse(rawData);
-          resolve(user);
-        });
-      });
-    });
+    return await this.get(`/${id}`);
   }
 }
