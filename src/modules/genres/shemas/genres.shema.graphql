@@ -8,4 +8,5 @@ type Genre {
 
 type Query {
   genre(id: ID!): Genre
+  genres: [Genre] 
 }

@@ -13,4 +13,9 @@ export class GenresService extends RESTDataSource {
   async findById(id: string): Promise<Genre> {
     return await this.get<Genre>(`/${id}`);
   }
+
+  async getAll(): Promise<Genre[]> {
+    const res: { items: Genre[] } = await this.get<{ items: Genre[] }>("/");
+    return res.items;
+  }
 }
