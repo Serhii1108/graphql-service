@@ -3,6 +3,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 
 import { UserModule } from "./modules/user/user.module.js";
+import { GenresModule } from "./modules/genres/genres.module.js";
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UserModule } from "./modules/user/user.module.js";
       typePaths: ["./**/*.graphql"],
     }),
     UserModule,
+    GenresModule,
   ],
 })
 export class AppModule {}
