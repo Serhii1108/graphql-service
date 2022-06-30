@@ -12,7 +12,7 @@ export class UserService extends RESTDataSource {
   }
 
   async findOneById(id: string): Promise<User> {
-    return await this.get(`/${id}`);
+    return await this.get<User>(`/${id}`);
   }
 
   async getJwt(email: string, password: string): Promise<string> {
@@ -23,8 +23,8 @@ export class UserService extends RESTDataSource {
     return res.jwt;
   }
 
-  async register(user: UserRegistrationModel) {
-    const res = await this.post("/register", { ...user });
-    return res;
+  async register(user: UserRegistrationModel): Promise<User> {
+    const createdUser: User = await this.post<User>("/register", { ...user });
+    return createdUser;
   }
 }

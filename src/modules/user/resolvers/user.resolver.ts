@@ -26,11 +26,12 @@ export class UserResolver {
     @Args("password") password: string,
     @Args("email") email: string
   ) {
-    return await this.userService.register({
+    const user: User = await this.userService.register({
       firstName,
       lastName,
       password,
       email,
     });
+    return user;
   }
 }
