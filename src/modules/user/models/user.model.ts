@@ -1,8 +1,10 @@
-export interface User {
-  id: string;
+export interface UserRegistrationModel {
   firstName: string;
-  secondName: string;
-  middleName: string;
+  lastName: string;
   password: string;
   email: string;
+}
+
+export interface User extends UserRegistrationModel {
+  _id: string;
 }

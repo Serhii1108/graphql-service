@@ -1,4 +1,5 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+
 import { User } from "../models/user.model.js";
 import { UserService } from "../services/user.service.js";
 
@@ -16,5 +17,20 @@ export class UserResolver {
   async jwt(@Args("email") email: string, @Args("password") password: string) {
     const jwt = await this.userService.getJwt(email, password);
     return jwt;
+  }
+
+  @Mutation()
+  async register(
+    @Args("firstName") firstName: string,
+    @Args("lastName") lastName: string,
+    @Args("password") password: string,
+    @Args("email") email: string
+  ) {
+    return await this.userService.register({
+      firstName,
+      lastName,
+      password,
+      email,
+    });
   }
 }

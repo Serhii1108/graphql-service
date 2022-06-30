@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { User } from "../models/user.model.js";
+import { User, UserRegistrationModel } from "../models/user.model.js";
 
 @Injectable()
 export class UserService extends RESTDataSource {
@@ -21,5 +21,10 @@ export class UserService extends RESTDataSource {
       password: password,
     });
     return res.jwt;
+  }
+
+  async register(user: UserRegistrationModel) {
+    const res = await this.post("/register", { ...user });
+    return res;
   }
 }
