@@ -1,6 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-import { CreateGenreDto, Genre } from "../models/genres.model.js";
+import {
+  CreateGenreDto,
+  DeleteUserResponse,
+  Genre,
+} from "../models/genres.model.js";
 
 @Injectable()
 export class GenresService extends RESTDataSource {
@@ -19,11 +23,20 @@ export class GenresService extends RESTDataSource {
     return res.items;
   }
 
-  async create(createGenreDto: CreateGenreDto) {
+  async create(createGenreDto: CreateGenreDto): Promise<Genre> {
     return await this.post<Genre>(
       "/",
       { ...createGenreDto },
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
+  }
+
+  async deleteGenre(id: string): Promise<DeleteUserResponse> {
+    const res: DeleteUserResponse = await this.delete<DeleteUserResponse>(
+      `/${id}`,
+      {},
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+    return res;
   }
 }

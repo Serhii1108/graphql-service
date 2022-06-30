@@ -18,4 +18,6 @@ type Mutation {
     country: String
     year: Int
   ): Genre
+
+  deleteGenre(id: ID!): DeleteResponse
 }

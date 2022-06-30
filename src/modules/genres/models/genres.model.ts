@@ -8,3 +8,8 @@ export interface CreateGenreDto {
 export interface Genre extends CreateGenreDto {
   _id: string;
 }
+
+export interface DeleteUserResponse {
+  acknowledged: boolean;
+  deletedCount: number;
+}

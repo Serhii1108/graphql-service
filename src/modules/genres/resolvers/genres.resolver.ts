@@ -34,4 +34,9 @@ export class GenresResolver {
     });
     return genre;
   }
+
+  @Mutation()
+  async deleteGenre(@Args("id") id: string) {
+    return await this.genresService.deleteGenre(id);
+  }
 }

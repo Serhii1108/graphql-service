@@ -1,0 +1,4 @@
+type DeleteResponse {
+  acknowledged: Boolean,
+  deletedCount: Int
+}
