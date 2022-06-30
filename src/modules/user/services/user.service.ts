@@ -14,4 +14,12 @@ export class UserService extends RESTDataSource {
   async findOneById(id: string): Promise<User> {
     return await this.get(`/${id}`);
   }
+
+  async getJwt(email: string, password: string): Promise<string> {
+    const res: { jwt: string } = await this.post("/login", {
+      email: email,
+      password: password,
+    });
+    return res.jwt;
+  }
 }

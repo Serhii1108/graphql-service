@@ -11,4 +11,10 @@ export class UserResolver {
     const user: User = await this.userService.findOneById(id);
     return user;
   }
+
+  @Query()
+  async jwt(@Args("email") email: string, @Args("password") password: string) {
+    const jwt = await this.userService.getJwt(email, password);
+    return jwt;
+  }
 }
