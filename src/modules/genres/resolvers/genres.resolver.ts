@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Genre } from "../models/genres.model.js";
 
 import { GenresService } from "../services/genres.service.js";
@@ -17,5 +17,21 @@ export class GenresResolver {
   async genres(): Promise<Genre[]> {
     const genres: Genre[] = await this.genresService.getAll();
     return genres;
+  }
+
+  @Mutation()
+  async createGenre(
+    @Args("name") name: string,
+    @Args("description") description: string,
+    @Args("country") country: string,
+    @Args("year") year: number
+  ) {
+    const genre: Genre = await this.genresService.create({
+      name,
+      description,
+      country,
+      year,
+    });
+    return genre;
   }
 }

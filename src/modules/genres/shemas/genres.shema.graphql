@@ -10,3 +10,12 @@ type Query {
   genre(id: ID!): Genre
   genres: [Genre] 
 }
+
+type Mutation {
+  createGenre(
+    name: String
+    description: String
+    country: String
+    year: Int
+  ): Genre
+}
