@@ -14,6 +14,13 @@ export interface CreateGenreInput {
     year?: Nullable<number>;
 }
 
+export interface UpdateGenreInput {
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    country?: Nullable<string>;
+    year?: Nullable<number>;
+}
+
 export interface RegisterInput {
     firstName?: Nullable<string>;
     lastName?: Nullable<string>;
@@ -39,6 +46,7 @@ export interface IQuery {
 export interface IMutation {
     createGenre(createGenreInput?: Nullable<CreateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     deleteGenre(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
+    updateGenre(id: string, updateGenreInput?: Nullable<UpdateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     register(registerInput?: Nullable<RegisterInput>): Nullable<User> | Promise<Nullable<User>>;
 }
 

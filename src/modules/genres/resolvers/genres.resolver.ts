@@ -1,7 +1,11 @@
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 
 import { GenresService } from "../services/genres.service.js";
-import { CreateGenreInput, Genre } from "src/types/graphql.js";
+import {
+  CreateGenreInput,
+  Genre,
+  UpdateGenreInput,
+} from "src/types/graphql.js";
 
 @Resolver("Genres")
 export class GenresResolver {
@@ -24,6 +28,15 @@ export class GenresResolver {
     @Args("createGenreInput") createGenreInput: CreateGenreInput
   ) {
     const genre: Genre = await this.genresService.create(createGenreInput);
+    return genre;
+  }
+
+  @Mutation()
+  async updateGenre(
+    @Args("id") id: string,
+    @Args("updateGenreInput") updateGenreInput: UpdateGenreInput
+  ) {
+    const genre: Genre = await this.genresService.update(id, updateGenreInput);
     return genre;
   }
 

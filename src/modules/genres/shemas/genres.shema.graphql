@@ -13,6 +13,13 @@ input CreateGenreInput {
   year: Int
 }
 
+input UpdateGenreInput{
+  name: String
+  description: String
+  country: String
+  year: Int
+}
+
 type Query {
   genre(id: ID!): Genre
   genres: [Genre] 
@@ -21,4 +28,5 @@ type Query {
 type Mutation {
   createGenre(createGenreInput: CreateGenreInput): Genre
   deleteGenre(id: ID!): DeleteResponse
+  updateGenre(id: ID! updateGenreInput: UpdateGenreInput): Genre
 }

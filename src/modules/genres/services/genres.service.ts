@@ -1,7 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { CreateGenreInput, Genre } from "src/types/graphql.js";
+import {
+  CreateGenreInput,
+  Genre,
+  UpdateGenreInput,
+} from "src/types/graphql.js";
 
 export interface DeleteUserResponse {
   acknowledged: boolean;
@@ -38,10 +42,18 @@ export class GenresService extends RESTDataSource {
     return res.items;
   }
 
-  async create(createGenreDto: CreateGenreInput): Promise<Genre> {
+  async create(createGenreInput: CreateGenreInput): Promise<Genre> {
     return await this.post<Genre>(
       "/",
-      { ...createGenreDto },
+      { ...createGenreInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
+
+  async update(id: string, updateGenreInput: UpdateGenreInput): Promise<Genre> {
+    return await this.put<Genre>(
+      `/${id}`,
+      { ...updateGenreInput },
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
