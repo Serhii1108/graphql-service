@@ -22,7 +22,7 @@ export interface RegisterInput {
 }
 
 export interface Genre {
-    _id: string;
+    id: string;
     name?: Nullable<string>;
     description?: Nullable<string>;
     country?: Nullable<string>;
@@ -32,7 +32,7 @@ export interface Genre {
 export interface IQuery {
     genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     genres(): Nullable<Nullable<Genre>[]> | Promise<Nullable<Nullable<Genre>[]>>;
-    user(_id: string): Nullable<User> | Promise<Nullable<User>>;
+    user(id: string): Nullable<User> | Promise<Nullable<User>>;
     jwt(email: string, password: string): Nullable<string> | Promise<Nullable<string>>;
 }
 
@@ -43,7 +43,7 @@ export interface IMutation {
 }
 
 export interface User {
-    _id: string;
+    id: string;
     firstName?: Nullable<string>;
     secondName?: Nullable<string>;
     middleName?: Nullable<string>;
