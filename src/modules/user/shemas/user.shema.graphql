@@ -7,16 +7,19 @@ type User {
   email: String!
 }
 
+input RegisterInput {
+  firstName: String
+  lastName: String
+  password: String!
+  email: String!
+}
+
 type Query {
   user(_id: ID!): User
   jwt(email: String!, password: String!): String
 }
 
 type Mutation {
-  register(
-    firstName: String
-    lastName: String
-    password: String!
-    email: String!
-  ): User
+  register(registerInput: RegisterInput): User
 }
+

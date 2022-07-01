@@ -1,10 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
-import {
-  CreateGenreDto,
-  DeleteUserResponse,
-  Genre,
-} from "../models/genres.model.js";
+
+import { CreateGenreInput, Genre } from "src/types/graphql.js";
+
+export interface DeleteUserResponse {
+  acknowledged: boolean;
+  deletedCount: number;
+}
 
 @Injectable()
 export class GenresService extends RESTDataSource {
@@ -23,7 +25,7 @@ export class GenresService extends RESTDataSource {
     return res.items;
   }
 
-  async create(createGenreDto: CreateGenreDto): Promise<Genre> {
+  async create(createGenreDto: CreateGenreInput): Promise<Genre> {
     return await this.post<Genre>(
       "/",
       { ...createGenreDto },

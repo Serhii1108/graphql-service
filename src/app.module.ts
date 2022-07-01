@@ -1,3 +1,4 @@
+import { join } from "path";
 import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
@@ -10,6 +11,9 @@ import { GenresModule } from "./modules/genres/genres.module.js";
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ["./**/*.graphql"],
+      definitions: {
+        path: join(process.cwd(), "src/types/graphql.ts"),
+      },
     }),
     UserModule,
     GenresModule,

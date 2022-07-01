@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 
-import { User } from "../models/user.model.js";
 import { UserService } from "../services/user.service.js";
+import { RegisterInput, User } from "src/types/graphql.js";
 
 @Resolver()
 export class UserResolver {
@@ -20,18 +20,8 @@ export class UserResolver {
   }
 
   @Mutation()
-  async register(
-    @Args("firstName") firstName: string,
-    @Args("lastName") lastName: string,
-    @Args("password") password: string,
-    @Args("email") email: string
-  ) {
-    const user: User = await this.userService.register({
-      firstName,
-      lastName,
-      password,
-      email,
-    });
+  async register(@Args("registerInput") registerInput: RegisterInput) {
+    const user: User = await this.userService.register(registerInput);
     return user;
   }
 }

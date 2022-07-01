@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { User, UserRegistrationDto } from "../models/user.model.js";
+import { RegisterInput, User } from "src/types/graphql.js";
 
 @Injectable()
 export class UserService extends RESTDataSource {
@@ -24,9 +24,9 @@ export class UserService extends RESTDataSource {
     return res.jwt;
   }
 
-  async register(userRegistrationDto: UserRegistrationDto): Promise<User> {
+  async register(registerInput: RegisterInput): Promise<User> {
     const createdUser: User = await this.post<User>("/register", {
-      ...userRegistrationDto,
+      ...registerInput,
     });
     return createdUser;
   }
