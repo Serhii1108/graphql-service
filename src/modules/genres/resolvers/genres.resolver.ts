@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { GenresService } from "../services/genres.service.js";
 import { CreateGenreInput, Genre } from "src/types/graphql.js";
 
-@Resolver()
+@Resolver("Genres")
 export class GenresResolver {
   constructor(private readonly genresService: GenresService) {}
 

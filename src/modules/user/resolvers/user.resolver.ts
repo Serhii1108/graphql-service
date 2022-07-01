@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { UserService } from "../services/user.service.js";
 import { RegisterInput, User } from "src/types/graphql.js";
 
-@Resolver()
+@Resolver("User")
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
