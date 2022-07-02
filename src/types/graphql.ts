@@ -13,7 +13,7 @@ export interface MemberInput {
     years?: Nullable<Nullable<string>[]>;
 }
 
-export interface CreateBandInput {
+export interface BandInput {
     name: string;
     origin?: Nullable<string>;
     members?: Nullable<Nullable<MemberInput>[]>;
@@ -67,7 +67,8 @@ export interface IQuery {
 }
 
 export interface IMutation {
-    createBand(createBandInput?: Nullable<CreateBandInput>): Nullable<Band> | Promise<Nullable<Band>>;
+    createBand(createBandInput?: Nullable<BandInput>): Nullable<Band> | Promise<Nullable<Band>>;
+    updateBand(id: string, updateBandInput?: Nullable<BandInput>): Nullable<Band> | Promise<Nullable<Band>>;
     deleteBand(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     createGenre(createGenreInput?: Nullable<CreateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     deleteGenre(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;

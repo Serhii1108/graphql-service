@@ -19,7 +19,7 @@ input MemberInput {
   years: [String]
 }
 
-input CreateBandInput {
+input BandInput {
   name: String!
   origin: String
   members: [MemberInput]
@@ -33,6 +33,7 @@ type Query {
 }
 
 type Mutation {
-  createBand(createBandInput: CreateBandInput): Band
+  createBand(createBandInput: BandInput): Band
+  updateBand(id: ID! updateBandInput: BandInput): Band
   deleteBand(id: ID!): DeleteResponse
 }
