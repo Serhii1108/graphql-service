@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { Band } from "src/types/graphql.js";
+import { Band, CreateBandInput } from "src/types/graphql.js";
 
 @Injectable()
 export class BandsService extends RESTDataSource {
@@ -18,5 +18,13 @@ export class BandsService extends RESTDataSource {
   async getAll(): Promise<[Band]> {
     const res: { items: [Band] } = await this.get("/");
     return res.items;
+  }
+
+  async create(createBandInput: CreateBandInput): Promise<Band> {
+    return await this.post<Band>(
+      "/",
+      { ...createBandInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
   }
 }

@@ -1,6 +1,13 @@
-import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 
-import { Band } from "src/types/graphql.js";
+import { Band, CreateBandInput } from "src/types/graphql.js";
 import { BandsService } from "../services/bands.service.js";
 
 @Resolver("Band")
@@ -17,6 +24,14 @@ export class BandsResolver {
   async bands(): Promise<[Band]> {
     const bands = await this.bandsService.getAll();
     return bands;
+  }
+
+  @Mutation()
+  async createBand(
+    @Args("createBandInput") createBandInput: CreateBandInput
+  ): Promise<Band> {
+    const band: Band = await this.bandsService.create(createBandInput);
+    return band;
   }
 
   @ResolveField()
