@@ -7,6 +7,20 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export interface MemberInput {
+    artist?: Nullable<string>;
+    instrument?: Nullable<string>;
+    years?: Nullable<Nullable<string>[]>;
+}
+
+export interface CreateBandInput {
+    name: string;
+    origin?: Nullable<string>;
+    members?: Nullable<Nullable<MemberInput>[]>;
+    website?: Nullable<string>;
+    genresIds?: Nullable<Nullable<string>[]>;
+}
+
 export interface CreateGenreInput {
     name?: Nullable<string>;
     description?: Nullable<string>;
@@ -28,15 +42,24 @@ export interface RegisterInput {
     email: string;
 }
 
-export interface Genre {
+export interface Band {
     id: string;
-    name?: Nullable<string>;
-    description?: Nullable<string>;
-    country?: Nullable<string>;
-    year?: Nullable<number>;
+    name: string;
+    origin?: Nullable<string>;
+    members?: Nullable<Nullable<Member>[]>;
+    website?: Nullable<string>;
+    genres?: Nullable<Nullable<Genre>[]>;
+}
+
+export interface Member {
+    artist?: Nullable<string>;
+    instrument?: Nullable<string>;
+    years?: Nullable<Nullable<string>[]>;
 }
 
 export interface IQuery {
+    band(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
+    bands(): Nullable<Nullable<Band>[]> | Promise<Nullable<Nullable<Band>[]>>;
     genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     genres(): Nullable<Nullable<Genre>[]> | Promise<Nullable<Nullable<Genre>[]>>;
     user(id: string): Nullable<User> | Promise<Nullable<User>>;
@@ -44,10 +67,19 @@ export interface IQuery {
 }
 
 export interface IMutation {
+    createBand(createBandInput?: Nullable<CreateBandInput>): Nullable<Band> | Promise<Nullable<Band>>;
     createGenre(createGenreInput?: Nullable<CreateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     deleteGenre(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     updateGenre(id: string, updateGenreInput?: Nullable<UpdateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     register(registerInput?: Nullable<RegisterInput>): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface Genre {
+    id: string;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    country?: Nullable<string>;
+    year?: Nullable<number>;
 }
 
 export interface User {
