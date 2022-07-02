@@ -1,4 +1,11 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 
 import { GenresService } from "../services/genres.service.js";
 import {
@@ -7,7 +14,7 @@ import {
   UpdateGenreInput,
 } from "src/types/graphql.js";
 
-@Resolver("Genres")
+@Resolver("Genre")
 export class GenresResolver {
   constructor(private readonly genresService: GenresService) {}
 
@@ -43,5 +50,10 @@ export class GenresResolver {
   @Mutation()
   async deleteGenre(@Args("id") id: string) {
     return await this.genresService.deleteGenre(id);
+  }
+
+  @ResolveField()
+  async id(@Parent() genre: { _id: string }) {
+    return genre._id;
   }
 }

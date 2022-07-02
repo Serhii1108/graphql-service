@@ -11,19 +11,6 @@ export class UserService extends RESTDataSource {
     this.httpCache = new HTTPCache();
   }
 
-  async didReceiveResponse(res: any) {
-    const data = await res.json();
-    if (res.ok) {
-      data.id = data._id;
-      if (data.items) {
-        for (const item of data.items) {
-          item.id = item._id;
-        }
-      }
-    }
-    return data;
-  }
-
   async findOneById(id: string): Promise<User> {
     const user: User = await this.get<User>(`/${id}`);
     return user;
