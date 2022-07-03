@@ -16,6 +16,15 @@ export class BandsService extends RESTDataSource {
     return await this.get<Band>(`/${id}`);
   }
 
+  async findByIds(ids: string[]): Promise<Band[]> {
+    const bands: Band[] = [];
+    for (const id of ids) {
+      const band: Band = await this.get<Band>(`/${id}`);
+      bands.push(band);
+    }
+    return bands;
+  }
+
   async getAll(limit: number, offset: number): Promise<[Band]> {
     const res: { items: [Band] } = await this.get(
       `?limit=${limit >= 0 ? limit : DEF_LIMIT}&offset=${

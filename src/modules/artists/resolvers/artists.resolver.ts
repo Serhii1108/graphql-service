@@ -7,12 +7,16 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Artist, ArtistInput } from "src/types/graphql.js";
+import { Artist, ArtistInput, Band } from "src/types/graphql.js";
 import { ArtistsService } from "../services/artists.service.js";
+import { BandsService } from "../../bands/services/bands.service.js";
 
 @Resolver("Artist")
 export class ArtistsResolver {
-  constructor(private readonly artistsService: ArtistsService) {}
+  constructor(
+    private readonly artistsService: ArtistsService,
+    private readonly bandsService: BandsService
+  ) {}
 
   @Query()
   async artist(@Args("id") id: string): Promise<Artist> {
@@ -40,5 +44,12 @@ export class ArtistsResolver {
   @ResolveField()
   async id(@Parent() artist: { _id: string }) {
     return artist._id;
+  }
+
+  @ResolveField()
+  async bands(@Parent() artist: { bandsIds: string[] }) {
+    const ids: string[] = artist.bandsIds;
+    const genres: Band[] = await this.bandsService.findByIds(ids);
+    return genres;
   }
 }
