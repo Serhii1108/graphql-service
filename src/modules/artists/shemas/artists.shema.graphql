@@ -12,4 +12,5 @@ type Artist {
 
 type Query {
   artist(id: ID!): Artist
+  artists(limit: Int offset: Int): [Artist]
 }

@@ -12,6 +12,15 @@ export class ArtistsResolver {
     return artist;
   }
 
+  @Query()
+  async artists(
+    @Args("limit") limit: number,
+    @Args("offset") offset: number
+  ): Promise<[Artist]> {
+    const artists = await this.artistsService.getAll(limit, offset);
+    return artists;
+  }
+
   @ResolveField()
   async id(@Parent() artist: { _id: string }) {
     return artist._id;
