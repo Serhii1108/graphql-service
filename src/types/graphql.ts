@@ -79,6 +79,7 @@ export interface IQuery {
 export interface IMutation {
     createArtist(createArtistInput?: Nullable<ArtistInput>): Nullable<Artist> | Promise<Nullable<Artist>>;
     updateArtist(id: string, updateArtistInput?: Nullable<ArtistInput>): Nullable<Artist> | Promise<Nullable<Artist>>;
+    deleteArtist(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     createBand(createBandInput?: Nullable<BandInput>): Nullable<Band> | Promise<Nullable<Band>>;
     updateBand(id: string, updateBandInput?: Nullable<BandInput>): Nullable<Band> | Promise<Nullable<Band>>;
     deleteBand(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;

@@ -7,7 +7,12 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Artist, ArtistInput, Band } from "src/types/graphql.js";
+import {
+  Artist,
+  ArtistInput,
+  Band,
+  DeleteResponse,
+} from "src/types/graphql.js";
 import { ArtistsService } from "../services/artists.service.js";
 import { BandsService } from "../../bands/services/bands.service.js";
 
@@ -51,6 +56,11 @@ export class ArtistsResolver {
       updateArtistInput
     );
     return artist;
+  }
+
+  @Mutation()
+  async deleteArtist(@Args("id") id: string): Promise<DeleteResponse> {
+    return await this.artistsService.deleteArtist(id);
   }
 
   @ResolveField()
