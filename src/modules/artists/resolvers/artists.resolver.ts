@@ -41,6 +41,18 @@ export class ArtistsResolver {
     return artist;
   }
 
+  @Mutation()
+  async updateArtist(
+    @Args("id") id: string,
+    @Args("updateArtistInput") updateArtistInput: ArtistInput
+  ): Promise<Artist> {
+    const artist: Artist = await this.artistsService.update(
+      id,
+      updateArtistInput
+    );
+    return artist;
+  }
+
   @ResolveField()
   async id(@Parent() artist: { _id: string }) {
     return artist._id;

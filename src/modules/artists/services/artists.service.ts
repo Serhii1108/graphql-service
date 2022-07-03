@@ -32,4 +32,12 @@ export class ArtistsService extends RESTDataSource {
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
+
+  async update(id: string, updateArtistInput: ArtistInput): Promise<Artist> {
+    return await this.put<Artist>(
+      `/${id}`,
+      { ...updateArtistInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
 }

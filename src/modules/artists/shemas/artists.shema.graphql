@@ -28,4 +28,5 @@ type Query {
 
 type Mutation {
   createArtist(createArtistInput: ArtistInput): Artist
+  updateArtist(id: ID! updateArtistInput: ArtistInput): Artist
 }
