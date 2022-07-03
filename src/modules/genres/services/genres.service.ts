@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
+import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
+
 import {
   CreateGenreInput,
   Genre,
@@ -33,8 +35,12 @@ export class GenresService extends RESTDataSource {
     return genres;
   }
 
-  async getAll(): Promise<Genre[]> {
-    const res: { items: Genre[] } = await this.get<{ items: Genre[] }>("/");
+  async getAll(limit: number, offset: number): Promise<Genre[]> {
+    const res: { items: Genre[] } = await this.get<{ items: Genre[] }>(
+      `?limit=${limit >= 0 ? limit : DEF_LIMIT}&offset=${
+        offset >= 0 ? offset : DEF_OFFSET
+      }`
+    );
     return res.items;
   }
 

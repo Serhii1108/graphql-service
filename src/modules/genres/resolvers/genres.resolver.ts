@@ -25,8 +25,11 @@ export class GenresResolver {
   }
 
   @Query()
-  async genres(): Promise<Genre[]> {
-    const genres: Genre[] = await this.genresService.getAll();
+  async genres(
+    @Args("limit") limit: number,
+    @Args("offset") offset: number
+  ): Promise<Genre[]> {
+    const genres: Genre[] = await this.genresService.getAll(limit, offset);
     return genres;
   }
 

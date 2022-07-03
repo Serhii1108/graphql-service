@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
 import { Band, BandInput, DeleteResponse } from "src/types/graphql.js";
+import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
 export class BandsService extends RESTDataSource {
@@ -15,8 +16,12 @@ export class BandsService extends RESTDataSource {
     return await this.get<Band>(`/${id}`);
   }
 
-  async getAll(): Promise<[Band]> {
-    const res: { items: [Band] } = await this.get("/");
+  async getAll(limit: number, offset: number): Promise<[Band]> {
+    const res: { items: [Band] } = await this.get(
+      `?limit=${limit >= 0 ? limit : DEF_LIMIT}&offset=${
+        offset >= 0 ? offset : DEF_OFFSET
+      }`
+    );
     return res.items;
   }
 

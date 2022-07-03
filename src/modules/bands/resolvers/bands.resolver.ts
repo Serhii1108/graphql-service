@@ -25,8 +25,11 @@ export class BandsResolver {
   }
 
   @Query()
-  async bands(): Promise<[Band]> {
-    const bands = await this.bandsService.getAll();
+  async bands(
+    @Args("limit") limit: number,
+    @Args("offset") offset: number
+  ): Promise<[Band]> {
+    const bands = await this.bandsService.getAll(limit, offset);
     return bands;
   }
 
