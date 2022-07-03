@@ -58,7 +58,7 @@ export interface Member {
 }
 
 export interface IQuery {
-    band(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
+    band(id: string): Nullable<Band> | Promise<Nullable<Band>>;
     bands(): Nullable<Nullable<Band>[]> | Promise<Nullable<Nullable<Band>[]>>;
     genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     genres(): Nullable<Nullable<Genre>[]> | Promise<Nullable<Nullable<Genre>[]>>;

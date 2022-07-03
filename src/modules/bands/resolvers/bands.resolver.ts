@@ -7,12 +7,16 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Band, BandInput, DeleteResponse } from "src/types/graphql.js";
+import { Band, BandInput, DeleteResponse, Genre } from "src/types/graphql.js";
 import { BandsService } from "../services/bands.service.js";
+import { GenresService } from "../../genres/services/genres.service.js";
 
 @Resolver("Band")
 export class BandsResolver {
-  constructor(private readonly bandsService: BandsService) {}
+  constructor(
+    private readonly bandsService: BandsService,
+    private readonly genresService: GenresService
+  ) {}
 
   @Query()
   async band(@Args("id") id: string): Promise<Band> {
@@ -51,5 +55,12 @@ export class BandsResolver {
   @ResolveField()
   async id(@Parent() band: { _id: string }) {
     return band._id;
+  }
+
+  @ResolveField()
+  async genres(@Parent() band: { genresIds: string[] }) {
+    const ids: string[] = band.genresIds;
+    const genres: Genre[] = await this.genresService.findByIds(ids);
+    return genres;
   }
 }

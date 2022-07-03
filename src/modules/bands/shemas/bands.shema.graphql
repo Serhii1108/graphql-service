@@ -28,7 +28,7 @@ input BandInput {
 }
 
 type Query {
-  band(id: ID!): Genre
+  band(id: ID!): Band
   bands: [Band]
 }
 
