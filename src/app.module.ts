@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { UserModule } from "./modules/user/user.module.js";
 import { GenresModule } from "./modules/genres/genres.module.js";
 import { BandsModule } from "./modules/bands/bands.module.js";
+import { ArtistsModule } from "./modules/artists/artists.module.js";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { BandsModule } from "./modules/bands/bands.module.js";
     UserModule,
     GenresModule,
     BandsModule,
+    ArtistsModule,
   ],
 })
 export class AppModule {}
