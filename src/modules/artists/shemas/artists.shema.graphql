@@ -10,7 +10,22 @@ type Artist {
     instruments: [String]
 }
 
+input ArtistInput {
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  country: String
+  bandsIds: [String]
+  instruments: [String]
+}
+
 type Query {
   artist(id: ID!): Artist
   artists(limit: Int offset: Int): [Artist]
+}
+
+type Mutation {
+  createArtist(createArtistInput: ArtistInput): Artist
 }

@@ -1,5 +1,13 @@
-import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { Artist } from "src/types/graphql.js";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
+
+import { Artist, ArtistInput } from "src/types/graphql.js";
 import { ArtistsService } from "../services/artists.service.js";
 
 @Resolver("Artist")
@@ -19,6 +27,14 @@ export class ArtistsResolver {
   ): Promise<[Artist]> {
     const artists = await this.artistsService.getAll(limit, offset);
     return artists;
+  }
+
+  @Mutation()
+  async createArtist(
+    @Args("createArtistInput") createArtistInput: ArtistInput
+  ): Promise<Artist> {
+    const artist: Artist = await this.artistsService.create(createArtistInput);
+    return artist;
   }
 
   @ResolveField()

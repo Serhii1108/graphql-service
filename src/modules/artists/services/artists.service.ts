@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { Artist } from "src/types/graphql.js";
+import { Artist, ArtistInput } from "src/types/graphql.js";
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
@@ -23,5 +23,13 @@ export class ArtistsService extends RESTDataSource {
       }`
     );
     return res.items;
+  }
+
+  async create(createArtistInput: ArtistInput): Promise<Artist> {
+    return await this.post<Artist>(
+      "/",
+      { ...createArtistInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
   }
 }
