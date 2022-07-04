@@ -1,11 +1,19 @@
 import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 
-import { Album } from "src/types/graphql.js";
+import { Album, Genre } from "src/types/graphql.js";
 import { albumsService } from "../services/albums.service.js";
+import { BandsService } from "../../bands/services/bands.service.js";
+import { ArtistsService } from "../../artists/services/artists.service.js";
+import { GenresService } from "../../genres/services/genres.service.js";
 
 @Resolver("Album")
 export class AlbumsResolver {
-  constructor(private readonly albumsService: albumsService) {}
+  constructor(
+    private readonly albumsService: albumsService,
+    private readonly bandsService: BandsService,
+    private readonly artistsService: ArtistsService,
+    private readonly genresService: GenresService
+  ) {}
 
   @Query()
   async album(@Args("id") id: string): Promise<Album> {
@@ -25,5 +33,26 @@ export class AlbumsResolver {
   @ResolveField()
   async id(@Parent() album: { _id: string }) {
     return album._id;
+  }
+
+  @ResolveField()
+  async bands(@Parent() album: { bandsIds: string[] }) {
+    const ids: string[] = album.bandsIds;
+    const genres: Genre[] = await this.bandsService.findByIds(ids);
+    return genres;
+  }
+
+  @ResolveField()
+  async artists(@Parent() album: { artistsIds: string[] }) {
+    const ids: string[] = album.artistsIds;
+    const artists: Album[] = await this.artistsService.findByIds(ids);
+    return artists;
+  }
+
+  @ResolveField()
+  async genres(@Parent() album: { genresIds: string[] }) {
+    const ids: string[] = album.genresIds;
+    const genres: Genre[] = await this.genresService.findByIds(ids);
+    return genres;
   }
 }

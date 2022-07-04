@@ -16,6 +16,15 @@ export class ArtistsService extends RESTDataSource {
     return await this.get<Artist>(`/${id}`);
   }
 
+  async findByIds(ids: string[]): Promise<Artist[]> {
+    const artists: Artist[] = [];
+    for (const id of ids) {
+      const artist: Artist = await this.get<Artist>(`/${id}`);
+      artists.push(artist);
+    }
+    return artists;
+  }
+
   async getAll(limit: number, offset: number): Promise<[Artist]> {
     const res: { items: [Artist] } = await this.get(
       `?limit=${limit >= 0 ? limit : DEF_LIMIT}&offset=${
