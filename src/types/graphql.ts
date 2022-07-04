@@ -7,6 +7,16 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export interface AlbumInput {
+    name?: Nullable<string>;
+    released?: Nullable<number>;
+    artistsIds?: Nullable<Nullable<string>[]>;
+    bandsIds?: Nullable<Nullable<string>[]>;
+    trackIds?: Nullable<Nullable<string>[]>;
+    genresIds?: Nullable<Nullable<string>[]>;
+    image?: Nullable<string>;
+}
+
 export interface ArtistInput {
     firstName?: Nullable<string>;
     secondName?: Nullable<string>;
@@ -77,19 +87,8 @@ export interface IQuery {
     jwt(email: string, password: string): Nullable<string> | Promise<Nullable<string>>;
 }
 
-export interface Artist {
-    id: string;
-    firstName?: Nullable<string>;
-    secondName?: Nullable<string>;
-    middleName?: Nullable<string>;
-    birthDate?: Nullable<string>;
-    birthPlace?: Nullable<string>;
-    country?: Nullable<string>;
-    bands?: Nullable<Nullable<Band>[]>;
-    instruments?: Nullable<Nullable<string>[]>;
-}
-
 export interface IMutation {
+    createAlbum(createAlbumInput?: Nullable<AlbumInput>): Nullable<Album> | Promise<Nullable<Album>>;
     createArtist(createArtistInput?: Nullable<ArtistInput>): Nullable<Artist> | Promise<Nullable<Artist>>;
     updateArtist(id: string, updateArtistInput?: Nullable<ArtistInput>): Nullable<Artist> | Promise<Nullable<Artist>>;
     deleteArtist(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
@@ -100,6 +99,18 @@ export interface IMutation {
     deleteGenre(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     updateGenre(id: string, updateGenreInput?: Nullable<UpdateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     register(registerInput?: Nullable<RegisterInput>): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface Artist {
+    id: string;
+    firstName?: Nullable<string>;
+    secondName?: Nullable<string>;
+    middleName?: Nullable<string>;
+    birthDate?: Nullable<string>;
+    birthPlace?: Nullable<string>;
+    country?: Nullable<string>;
+    bands?: Nullable<Nullable<Band>[]>;
+    instruments?: Nullable<Nullable<string>[]>;
 }
 
 export interface Band {

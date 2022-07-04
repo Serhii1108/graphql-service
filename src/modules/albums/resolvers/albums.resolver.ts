@@ -1,6 +1,13 @@
-import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 
-import { Album, Genre } from "src/types/graphql.js";
+import { Album, AlbumInput, Genre } from "src/types/graphql.js";
 import { albumsService } from "../services/albums.service.js";
 import { BandsService } from "../../bands/services/bands.service.js";
 import { ArtistsService } from "../../artists/services/artists.service.js";
@@ -27,6 +34,14 @@ export class AlbumsResolver {
     @Args("offset") offset: number
   ): Promise<[Album]> {
     const album = await this.albumsService.getAll(limit, offset);
+    return album;
+  }
+
+  @Mutation()
+  async createAlbum(
+    @Args("createAlbumInput") createAlbumInput: AlbumInput
+  ): Promise<Album> {
+    const album: Album = await this.albumsService.create(createAlbumInput);
     return album;
   }
 

@@ -9,7 +9,21 @@ type Album {
   image: String
 }
 
+input AlbumInput {
+  name: String
+  released: Int
+  artistsIds: [String]
+  bandsIds: [String]
+  trackIds: [String]
+  genresIds: [String]
+  image: String
+}
+
 type Query {
   album(id: ID!): Album
   albums(limit: Int offset: Int): [Album]
+}
+
+type Mutation {
+  createAlbum(createAlbumInput: AlbumInput): Album
 }

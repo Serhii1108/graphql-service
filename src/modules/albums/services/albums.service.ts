@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { Album } from "src/types/graphql.js";
+import { Album, AlbumInput } from "src/types/graphql.js";
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
@@ -23,5 +23,13 @@ export class albumsService extends RESTDataSource {
       }`
     );
     return res.items;
+  }
+
+  async create(createAlbumInput: AlbumInput): Promise<Album> {
+    return await this.post<Album>(
+      "/",
+      { ...createAlbumInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
   }
 }
