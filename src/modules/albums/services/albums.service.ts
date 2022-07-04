@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
-import { Album, AlbumInput } from "src/types/graphql.js";
+import { Album, AlbumInput, DeleteResponse } from "src/types/graphql.js";
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
@@ -37,6 +37,14 @@ export class albumsService extends RESTDataSource {
     return await this.put<Album>(
       `/${id}`,
       { ...updateAlbumInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
+
+  async deleteAlbum(id: string): Promise<DeleteResponse> {
+    return await this.delete<DeleteResponse>(
+      `/${id}`,
+      {},
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }

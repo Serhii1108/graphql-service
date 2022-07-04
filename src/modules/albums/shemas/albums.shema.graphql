@@ -27,4 +27,5 @@ type Query {
 type Mutation {
   createAlbum(createAlbumInput: AlbumInput): Album
   updateAlbum(id: ID! updateAlbumInput: AlbumInput): Album
+  deleteAlbum(id: ID!): DeleteResponse
 }
