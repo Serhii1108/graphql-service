@@ -32,4 +32,12 @@ export class albumsService extends RESTDataSource {
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
+
+  async update(id: string, updateAlbumInput: AlbumInput): Promise<Album> {
+    return await this.put<Album>(
+      `/${id}`,
+      { ...updateAlbumInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
 }

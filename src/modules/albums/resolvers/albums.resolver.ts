@@ -45,6 +45,15 @@ export class AlbumsResolver {
     return album;
   }
 
+  @Mutation()
+  async updateAlbum(
+    @Args("id") id: string,
+    @Args("updateAlbumInput") updateAlbumInput: AlbumInput
+  ): Promise<Album> {
+    const album: Album = await this.albumsService.update(id, updateAlbumInput);
+    return album;
+  }
+
   @ResolveField()
   async id(@Parent() album: { _id: string }) {
     return album._id;
