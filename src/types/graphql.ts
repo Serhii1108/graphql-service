@@ -66,6 +66,7 @@ export interface Album {
 
 export interface IQuery {
     album(id: string): Nullable<Album> | Promise<Nullable<Album>>;
+    albums(limit?: Nullable<number>, offset?: Nullable<number>): Nullable<Nullable<Album>[]> | Promise<Nullable<Nullable<Album>[]>>;
     artist(id: string): Nullable<Artist> | Promise<Nullable<Artist>>;
     artists(limit?: Nullable<number>, offset?: Nullable<number>): Nullable<Nullable<Artist>[]> | Promise<Nullable<Nullable<Artist>[]>>;
     band(id: string): Nullable<Band> | Promise<Nullable<Band>>;

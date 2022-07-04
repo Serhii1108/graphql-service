@@ -13,6 +13,15 @@ export class AlbumsResolver {
     return album;
   }
 
+  @Query()
+  async albums(
+    @Args("limit") limit: number,
+    @Args("offset") offset: number
+  ): Promise<[Album]> {
+    const album = await this.albumsService.getAll(limit, offset);
+    return album;
+  }
+
   @ResolveField()
   async id(@Parent() album: { _id: string }) {
     return album._id;
