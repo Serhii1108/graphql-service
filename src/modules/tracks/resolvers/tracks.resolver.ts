@@ -13,6 +13,15 @@ export class TracksResolver {
     return track;
   }
 
+  @Query()
+  async tracks(
+    @Args("limit") limit: number,
+    @Args("offset") offset: number
+  ): Promise<[Track]> {
+    const track = await this.tracksService.getAll(limit, offset);
+    return track;
+  }
+
   @ResolveField()
   async id(@Parent() track: { _id: string }) {
     return track._id;
