@@ -7,7 +7,14 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Album, AlbumInput, DeleteResponse, Genre } from "src/types/graphql.js";
+import {
+  Album,
+  AlbumInput,
+  Artist,
+  Band,
+  DeleteResponse,
+  Genre,
+} from "src/types/graphql.js";
 import { albumsService } from "../services/albums.service.js";
 import { BandsService } from "../../bands/services/bands.service.js";
 import { ArtistsService } from "../../artists/services/artists.service.js";
@@ -67,14 +74,14 @@ export class AlbumsResolver {
   @ResolveField()
   async bands(@Parent() album: { bandsIds: string[] }) {
     const ids: string[] = album.bandsIds;
-    const genres: Genre[] = await this.bandsService.findByIds(ids);
-    return genres;
+    const bands: Band[] = await this.bandsService.findByIds(ids);
+    return bands;
   }
 
   @ResolveField()
   async artists(@Parent() album: { artistsIds: string[] }) {
     const ids: string[] = album.artistsIds;
-    const artists: Album[] = await this.artistsService.findByIds(ids);
+    const artists: Artist[] = await this.artistsService.findByIds(ids);
     return artists;
   }
 
