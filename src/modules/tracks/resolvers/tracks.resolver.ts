@@ -7,7 +7,7 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Track, TrackInput } from "src/types/graphql.js";
+import { DeleteResponse, Track, TrackInput } from "src/types/graphql.js";
 import { TracksService } from "../services/tracks.service.js";
 
 @Resolver("Track")
@@ -44,6 +44,11 @@ export class TracksResolver {
   ): Promise<Track> {
     const track: Track = await this.tracksService.update(id, updateTrackInput);
     return track;
+  }
+
+  @Mutation()
+  async deleteTrack(@Args("id") id: string): Promise<DeleteResponse> {
+    return await this.tracksService.deleteTrack(id);
   }
 
   @ResolveField()

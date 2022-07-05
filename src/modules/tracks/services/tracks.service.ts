@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { RESTDataSource, HTTPCache } from "apollo-datasource-rest";
 
-import { Track, TrackInput } from "src/types/graphql.js";
+import { DeleteResponse, Track, TrackInput } from "src/types/graphql.js";
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
@@ -37,6 +37,14 @@ export class TracksService extends RESTDataSource {
     return await this.put<Track>(
       `/${id}`,
       { ...updateTrackInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
+
+  async deleteTrack(id: string): Promise<DeleteResponse> {
+    return await this.delete<DeleteResponse>(
+      `/${id}`,
+      {},
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }

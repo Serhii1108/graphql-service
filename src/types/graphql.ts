@@ -114,6 +114,7 @@ export interface IMutation {
     updateGenre(id: string, updateGenreInput?: Nullable<UpdateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     createTrack(createTrackInput?: Nullable<TrackInput>): Nullable<Track> | Promise<Nullable<Track>>;
     updateTrack(id: string, updateTrackInput?: Nullable<TrackInput>): Nullable<Track> | Promise<Nullable<Track>>;
+    deleteTrack(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     register(registerInput?: Nullable<RegisterInput>): Nullable<User> | Promise<Nullable<User>>;
 }
 
