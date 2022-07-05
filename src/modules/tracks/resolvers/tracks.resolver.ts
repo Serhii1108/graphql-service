@@ -37,6 +37,15 @@ export class TracksResolver {
     return track;
   }
 
+  @Mutation()
+  async updateTrack(
+    @Args("id") id: string,
+    @Args("updateTrackInput") updateTrackInput: TrackInput
+  ): Promise<Track> {
+    const track: Track = await this.tracksService.update(id, updateTrackInput);
+    return track;
+  }
+
   @ResolveField()
   async id(@Parent() track: { _id: string }) {
     return track._id;

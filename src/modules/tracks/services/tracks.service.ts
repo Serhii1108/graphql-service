@@ -32,4 +32,12 @@ export class TracksService extends RESTDataSource {
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
+
+  async update(id: string, updateTrackInput: TrackInput): Promise<Track> {
+    return await this.put<Track>(
+      `/${id}`,
+      { ...updateTrackInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
 }
