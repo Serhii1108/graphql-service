@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { RESTDataSource, HTTPCache } from "apollo-datasource-rest";
 
-import { Track } from "src/types/graphql.js";
+import { Track, TrackInput } from "src/types/graphql.js";
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
 @Injectable()
@@ -23,5 +23,13 @@ export class TracksService extends RESTDataSource {
       }`
     );
     return res.items;
+  }
+
+  async create(createTrackInput: TrackInput): Promise<Track> {
+    return await this.post<Track>(
+      "/",
+      { ...createTrackInput },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
   }
 }

@@ -1,6 +1,13 @@
-import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 
-import { Track } from "src/types/graphql.js";
+import { Track, TrackInput } from "src/types/graphql.js";
 import { TracksService } from "../services/tracks.service.js";
 
 @Resolver("Track")
@@ -19,6 +26,14 @@ export class TracksResolver {
     @Args("offset") offset: number
   ): Promise<[Track]> {
     const track = await this.tracksService.getAll(limit, offset);
+    return track;
+  }
+
+  @Mutation()
+  async createTrack(
+    @Args("createTrackInput") createTrackInput: TrackInput
+  ): Promise<Track> {
+    const track: Track = await this.tracksService.create(createTrackInput);
     return track;
   }
 
