@@ -7,15 +7,25 @@ import {
   Resolver,
 } from "@nestjs/graphql";
 
-import { Band, BandInput, DeleteResponse, Genre } from "src/types/graphql.js";
+import {
+  Artist,
+  Band,
+  BandInput,
+  DeleteResponse,
+  Genre,
+  Member,
+  MemberInput,
+} from "src/types/graphql.js";
 import { BandsService } from "../services/bands.service.js";
 import { GenresService } from "../../genres/services/genres.service.js";
+import { ArtistsService } from "../../artists/services/artists.service.js";
 
 @Resolver("Band")
 export class BandsResolver {
   constructor(
     private readonly bandsService: BandsService,
-    private readonly genresService: GenresService
+    private readonly genresService: GenresService,
+    private readonly artistsService: ArtistsService
   ) {}
 
   @Query()
@@ -65,5 +75,25 @@ export class BandsResolver {
     const ids: string[] = band.genresIds;
     const genres: Genre[] = await this.genresService.findByIds(ids);
     return genres;
+  }
+
+  @ResolveField()
+  async members(@Parent() band: { members: MemberInput[] }) {
+    const { members } = band;
+    const artists: Artist[] = await Promise.all(
+      members.map(async (member) => {
+        return this.artistsService.findById(member.artist);
+      })
+    );
+    return await Promise.all(
+      artists.map<Member>((artist, index) => ({
+        id: members[index].artist,
+        firstName: artist.firstName,
+        secondName: artist.secondName,
+        middleName: artist.middleName,
+        instrument: members[index].instrument,
+        years: members[index].years,
+      }))
+    );
   }
 }

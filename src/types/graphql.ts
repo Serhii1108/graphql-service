@@ -29,7 +29,7 @@ export interface ArtistInput {
 }
 
 export interface MemberInput {
-    artist?: Nullable<string>;
+    artist: string;
     instrument?: Nullable<string>;
     years?: Nullable<Nullable<string>[]>;
 }
@@ -145,7 +145,10 @@ export interface Band {
 }
 
 export interface Member {
-    artist?: Nullable<string>;
+    id: string;
+    firstName?: Nullable<string>;
+    secondName?: Nullable<string>;
+    middleName?: Nullable<string>;
     instrument?: Nullable<string>;
     years?: Nullable<Nullable<string>[]>;
 }
