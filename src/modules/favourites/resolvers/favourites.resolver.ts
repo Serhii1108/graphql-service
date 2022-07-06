@@ -1,4 +1,11 @@
-import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 
 import { Artist, Band, Favourites, Genre, Track } from "src/types/graphql.js";
 
@@ -21,6 +28,11 @@ export class FavouritesResolver {
   @Query()
   async favourites(): Promise<Favourites> {
     return await this.favouritesService.getFavourites();
+  }
+
+  @Mutation()
+  async addTrackToFavourites(@Args("id") id: string) {
+    return await this.favouritesService.addTrackToFavourites(id);
   }
 
   @ResolveField()
