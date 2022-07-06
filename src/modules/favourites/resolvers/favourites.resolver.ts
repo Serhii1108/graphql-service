@@ -45,6 +45,11 @@ export class FavouritesResolver {
     return await this.favouritesService.addArtistToFavourites(id);
   }
 
+  @Mutation()
+  async addGenreToFavourites(@Args("id") id: string) {
+    return await this.favouritesService.addGenreToFavourites(id);
+  }
+
   @ResolveField()
   async id(@Parent() favourites: { _id: string }) {
     return favourites._id;

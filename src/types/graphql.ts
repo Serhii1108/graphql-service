@@ -113,6 +113,7 @@ export interface IMutation {
     addTrackToFavourites(id: string): Nullable<Favourites> | Promise<Nullable<Favourites>>;
     addBandToFavourites(id: string): Nullable<Favourites> | Promise<Nullable<Favourites>>;
     addArtistToFavourites(id: string): Nullable<Favourites> | Promise<Nullable<Favourites>>;
+    addGenreToFavourites(id: string): Nullable<Favourites> | Promise<Nullable<Favourites>>;
     createGenre(createGenreInput?: Nullable<CreateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
     deleteGenre(id: string): Nullable<DeleteResponse> | Promise<Nullable<DeleteResponse>>;
     updateGenre(id: string, updateGenreInput?: Nullable<UpdateGenreInput>): Nullable<Genre> | Promise<Nullable<Genre>>;
