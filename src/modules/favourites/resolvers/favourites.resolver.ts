@@ -32,22 +32,22 @@ export class FavouritesResolver {
 
   @Mutation()
   async addTrackToFavourites(@Args("id") id: string) {
-    return await this.favouritesService.addTrackToFavourites(id);
+    return await this.favouritesService.addToFavourites(id, "tracks");
   }
 
   @Mutation()
   async addBandToFavourites(@Args("id") id: string) {
-    return await this.favouritesService.addBandToFavourites(id);
+    return await this.favouritesService.addToFavourites(id, "bands");
   }
 
   @Mutation()
   async addArtistToFavourites(@Args("id") id: string) {
-    return await this.favouritesService.addArtistToFavourites(id);
+    return await this.favouritesService.addToFavourites(id, "artists");
   }
 
   @Mutation()
   async addGenreToFavourites(@Args("id") id: string) {
-    return await this.favouritesService.addGenreToFavourites(id);
+    return await this.favouritesService.addToFavourites(id, "genres");
   }
 
   @ResolveField()

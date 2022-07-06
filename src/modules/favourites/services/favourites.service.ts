@@ -19,34 +19,10 @@ export class FavouritesService extends RESTDataSource {
     );
   }
 
-  async addTrackToFavourites(id: string): Promise<Favourites> {
+  async addToFavourites(id: string, type: string): Promise<Favourites> {
     return await this.put<Favourites>(
       "/add",
-      { type: "tracks", id },
-      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
-    );
-  }
-
-  async addBandToFavourites(id: string): Promise<Favourites> {
-    return await this.put<Favourites>(
-      "/add",
-      { type: "bands", id },
-      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
-    );
-  }
-
-  async addArtistToFavourites(id: string): Promise<Favourites> {
-    return await this.put<Favourites>(
-      "/add",
-      { type: "artists", id },
-      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
-    );
-  }
-
-  async addGenreToFavourites(id: string): Promise<Favourites> {
-    return await this.put<Favourites>(
-      "/add",
-      { type: "genres", id },
+      { type, id },
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
