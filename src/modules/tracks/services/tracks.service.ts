@@ -16,6 +16,15 @@ export class TracksService extends RESTDataSource {
     return await this.get<Track>(`/${id}`);
   }
 
+  async findByIds(ids: string[]): Promise<Track[]> {
+    const tracks: Track[] = [];
+    for (const id of ids) {
+      const track: Track = await this.get<Track>(`/${id}`);
+      tracks.push(track);
+    }
+    return tracks;
+  }
+
   async getAll(limit: number, offset: number): Promise<[Track]> {
     const res: { items: [Track] } = await this.get(
       `?limit=${limit >= 0 ? limit : DEF_LIMIT}&offset=${

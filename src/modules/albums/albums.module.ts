@@ -4,6 +4,7 @@ import { BandsService } from "../bands/services/bands.service.js";
 import { AlbumsResolver } from "./resolvers/albums.resolver.js";
 import { ArtistsService } from "../artists/services/artists.service.js";
 import { GenresService } from "../genres/services/genres.service.js";
+import { TracksService } from "../tracks/services/tracks.service.js";
 
 @Module({
   providers: [
@@ -11,6 +12,7 @@ import { GenresService } from "../genres/services/genres.service.js";
     BandsService,
     ArtistsService,
     GenresService,
+    TracksService,
     AlbumsResolver,
   ],
 })

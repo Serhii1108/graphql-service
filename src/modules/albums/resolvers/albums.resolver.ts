@@ -14,11 +14,13 @@ import {
   Band,
   DeleteResponse,
   Genre,
+  Track,
 } from "src/types/graphql.js";
 import { albumsService } from "../services/albums.service.js";
 import { BandsService } from "../../bands/services/bands.service.js";
 import { ArtistsService } from "../../artists/services/artists.service.js";
 import { GenresService } from "../../genres/services/genres.service.js";
+import { TracksService } from "../../tracks/services/tracks.service.js";
 
 @Resolver("Album")
 export class AlbumsResolver {
@@ -26,7 +28,8 @@ export class AlbumsResolver {
     private readonly albumsService: albumsService,
     private readonly bandsService: BandsService,
     private readonly artistsService: ArtistsService,
-    private readonly genresService: GenresService
+    private readonly genresService: GenresService,
+    private readonly tracksService: TracksService
   ) {}
 
   @Query()
@@ -90,5 +93,12 @@ export class AlbumsResolver {
     const ids: string[] = album.genresIds;
     const genres: Genre[] = await this.genresService.findByIds(ids);
     return genres;
+  }
+
+  @ResolveField()
+  async tracks(@Parent() album: { tracksIds: string[] }) {
+    const ids: string[] = album.tracksIds;
+    const tracks: Track[] = await this.tracksService.findByIds(ids);
+    return tracks;
   }
 }

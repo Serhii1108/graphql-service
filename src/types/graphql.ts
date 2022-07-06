@@ -79,7 +79,7 @@ export interface Album {
     released?: Nullable<number>;
     artists?: Nullable<Nullable<Artist>[]>;
     bands?: Nullable<Nullable<Band>[]>;
-    tracks?: Nullable<Nullable<string>[]>;
+    tracks?: Nullable<Nullable<Track>[]>;
     genres?: Nullable<Nullable<Genre>[]>;
     image?: Nullable<string>;
 }
