@@ -14,4 +14,5 @@ type Query {
 type Mutation {
   addTrackToFavourites(id: ID!): Favourites
   addBandToFavourites(id: ID!): Favourites
+  addArtistToFavourites(id: ID!): Favourites
 }

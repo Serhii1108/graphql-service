@@ -34,4 +34,12 @@ export class FavouritesService extends RESTDataSource {
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
+
+  async addArtistToFavourites(id: string): Promise<Favourites> {
+    return await this.put<Favourites>(
+      "/add",
+      { type: "artists", id },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
 }
