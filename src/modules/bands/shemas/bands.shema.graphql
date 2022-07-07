@@ -31,12 +31,12 @@ input BandInput {
 }
 
 type Query {
-  band(id: ID!): Band
-  bands(limit: Int, offset: Int): [Band]
+  band(id: ID!): Band!
+  bands(limit: Int, offset: Int): [Band]!
 }
 
 type Mutation {
-  createBand(createBandInput: BandInput): Band
-  updateBand(id: ID!, updateBandInput: BandInput): Band
-  deleteBand(id: ID!): DeleteResponse
+  createBand(createBandInput: BandInput): Band!
+  updateBand(id: ID!, updateBandInput: BandInput): Band!
+  deleteBand(id: ID!): DeleteResponse!
 }

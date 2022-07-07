@@ -3,11 +3,7 @@ import { HTTPCache, RESTDataSource } from "apollo-datasource-rest";
 
 import { DEF_LIMIT, DEF_OFFSET } from "../../../constants/constants.js";
 
-import {
-  CreateGenreInput,
-  Genre,
-  UpdateGenreInput,
-} from "src/types/graphql.js";
+import { Genre, GenreInput } from "src/types/graphql.js";
 
 export interface DeleteUserResponse {
   acknowledged: boolean;
@@ -44,7 +40,7 @@ export class GenresService extends RESTDataSource {
     return res.items;
   }
 
-  async create(createGenreInput: CreateGenreInput): Promise<Genre> {
+  async create(createGenreInput: GenreInput): Promise<Genre> {
     return await this.post<Genre>(
       "/",
       { ...createGenreInput },
@@ -52,7 +48,7 @@ export class GenresService extends RESTDataSource {
     );
   }
 
-  async update(id: string, updateGenreInput: UpdateGenreInput): Promise<Genre> {
+  async update(id: string, updateGenreInput: GenreInput): Promise<Genre> {
     return await this.put<Genre>(
       `/${id}`,
       { ...updateGenreInput },
