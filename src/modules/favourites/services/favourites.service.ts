@@ -26,4 +26,12 @@ export class FavouritesService extends RESTDataSource {
       { headers: { Authorization: `Bearer ${process.env.JWT}` } }
     );
   }
+
+  async removeFromFavourites(id: string, type: string): Promise<Favourites> {
+    return await this.put<Favourites>(
+      "/remove",
+      { type, id },
+      { headers: { Authorization: `Bearer ${process.env.JWT}` } }
+    );
+  }
 }

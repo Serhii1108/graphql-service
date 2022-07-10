@@ -50,6 +50,26 @@ export class FavouritesResolver {
     return await this.favouritesService.addToFavourites(id, "genres");
   }
 
+  @Mutation()
+  async removeTrackFromFavourites(@Args("id") id: string) {
+    return await this.favouritesService.removeFromFavourites(id, "tracks");
+  }
+
+  @Mutation()
+  async removeBandFromFavourites(@Args("id") id: string) {
+    return await this.favouritesService.removeFromFavourites(id, "bands");
+  }
+
+  @Mutation()
+  async removeArtistFromFavourites(@Args("id") id: string) {
+    return await this.favouritesService.removeFromFavourites(id, "artists");
+  }
+
+  @Mutation()
+  async removeGenreFromFavourites(@Args("id") id: string) {
+    return await this.favouritesService.removeFromFavourites(id, "genres");
+  }
+
   @ResolveField()
   async id(@Parent() favourites: { _id: string }) {
     return favourites._id;

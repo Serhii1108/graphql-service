@@ -107,6 +107,10 @@ export interface IMutation {
     addBandToFavourites(id: string): Favourites | Promise<Favourites>;
     addArtistToFavourites(id: string): Favourites | Promise<Favourites>;
     addGenreToFavourites(id: string): Favourites | Promise<Favourites>;
+    removeTrackFromFavourites(id: string): Favourites | Promise<Favourites>;
+    removeBandFromFavourites(id: string): Favourites | Promise<Favourites>;
+    removeArtistFromFavourites(id: string): Favourites | Promise<Favourites>;
+    removeGenreFromFavourites(id: string): Favourites | Promise<Favourites>;
     createGenre(createGenreInput?: Nullable<GenreInput>): Genre | Promise<Genre>;
     updateGenre(id: string, updateGenreInput?: Nullable<GenreInput>): Genre | Promise<Genre>;
     deleteGenre(id: string): DeleteResponse | Promise<DeleteResponse>;
