@@ -15,7 +15,7 @@
 ## Useful information
 
 - URL: <http://localhost:3000/graphql>
-- For all graphql requests please see ``` *.shema.graphql\ ``` files
+- For all graphql requests please see ``` *.shema.graphql ``` files
 
 ## Scoring: Graphql Service
 
